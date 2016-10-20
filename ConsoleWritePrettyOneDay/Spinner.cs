@@ -14,7 +14,13 @@ namespace ConsoleWritePrettyOneDay
         /// </summary>
         public static void Wait(Action action, string message = null)
         {
-            Wait(Task.Run(action), message);
+            var task = Task.Run(action);
+            Wait(task, message);
+
+            if (task.IsFaulted)
+            {
+                throw task.Exception?.InnerException ?? task.Exception;
+            }
         }
 
         /// <summary>
