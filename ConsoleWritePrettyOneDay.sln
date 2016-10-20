@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleWritePrettyOneDay", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleWritePrettyOneDay.App", "ConsoleWritePrettyOneDay.App\ConsoleWritePrettyOneDay.App.csproj", "{8F4621C9-9E19-4650-B548-C0DF9D59201C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleWritePrettyOneDay.Tests", "ConsoleWritePrettyOneDay.Tests\ConsoleWritePrettyOneDay.Tests.csproj", "{484E237A-4D16-4142-A64C-97141A3DCABF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8F4621C9-9E19-4650-B548-C0DF9D59201C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F4621C9-9E19-4650-B548-C0DF9D59201C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F4621C9-9E19-4650-B548-C0DF9D59201C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{484E237A-4D16-4142-A64C-97141A3DCABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{484E237A-4D16-4142-A64C-97141A3DCABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{484E237A-4D16-4142-A64C-97141A3DCABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{484E237A-4D16-4142-A64C-97141A3DCABF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
