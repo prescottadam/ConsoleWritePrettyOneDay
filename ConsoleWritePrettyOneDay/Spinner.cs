@@ -8,16 +8,29 @@ namespace ConsoleWritePrettyOneDay
     {
         private static char[] _chars = new[] { '|', '/', '-', '\\', '|', '/', '-', '\\' };
 
+        /// <summary>
+        /// Displays a spinner while the provided <paramref name="action"/> is performed.
+        /// If provided, <paramref name="message"/> will be displayed along with the elapsed time in milliseconds.
+        /// </summary>
         public static void Wait(Action action, string message = null)
         {
             Wait(Task.Run(action), message);
         }
 
+        /// <summary>
+        /// Displays a spinner while the provided <paramref name="task"/> is executed.
+        /// If provided, <paramref name="message"/> will be displayed along with the elapsed time in milliseconds.
+        /// </summary>
         public static void Wait(Task task, string message = null)
         {
             WaitAsync(task, message).Wait();
         }
 
+        /// <summary>
+        /// Displays a spinner while the provided <paramref name="task"/> is executed.
+        /// If provided, <paramref name="message"/> will be displayed along with the elapsed time in milliseconds.
+        /// </summary>
+        /// <returns></returns>
         public static async Task WaitAsync(Task task, string message = null)
         {
             int index = 0;
