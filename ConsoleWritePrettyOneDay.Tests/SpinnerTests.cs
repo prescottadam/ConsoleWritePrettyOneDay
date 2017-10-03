@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace ConsoleWritePrettyOneDay.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class SpinnerTests
     {
-        [TestMethod]
+        [Test]
         public void Wait_ExecutesAction()
         {
             // ARRANGE
@@ -23,22 +23,26 @@ namespace ConsoleWritePrettyOneDay.Tests
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ApplicationException))]
+        [Test]
         public void Wait_ThrowException_WhenActionThrowsException()
         {
-            // ARRANGE
-            Action action = () => {
-                throw new ApplicationException();
-            };
+            void Test()
+            {
+                // ARRANGE
+                Action action = () =>
+                {
+                    throw new ApplicationException();
+                };
 
-            // ACT
-            Spinner.Wait(action);
+                // ACT
+                Spinner.Wait(action);
+            }
 
             // ASSERT
+            Assert.Throws(typeof(ApplicationException), Test);
         }
 
-        [TestMethod]
+        [Test]
         public void Wait_ExecutesTask()
         {
             // ARRANGE
@@ -54,7 +58,7 @@ namespace ConsoleWritePrettyOneDay.Tests
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [Test]
         public void Wait_DoesNotThrowException_WhenTaskThrowsException()
         {
             // ARRANGE
