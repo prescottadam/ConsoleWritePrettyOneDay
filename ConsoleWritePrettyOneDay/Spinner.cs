@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace ConsoleWritePrettyOneDay
@@ -38,44 +37,35 @@ namespace ConsoleWritePrettyOneDay
         /// </summary>
         public static async Task WaitAsync(Task task, string message = null)
         {
-            int index = 0;
-            int max = _chars.Length;
+            var index = 0;
+            var max = _chars.Length;
+
+            var cursorLeft = Console.CursorLeft;
+            var cursorTop = Console.CursorTop;
+            var cursorVisible = Console.CursorVisible;
 
             if (!string.IsNullOrWhiteSpace(message))
             {
-                Console.WriteLine($"{message}...");
+                Console.WriteLine($"{message}");
             }
 
-            int line = Console.CursorTop;
-            var timer = new Stopwatch();
-            timer.Start();
             while (!task.IsCompleted)
             {
                 await Task.Delay(35);
                 index = ++index % max;
-                Console.WriteLine(_chars[index]);
-                MoveCursorToPreviousLine();
+                Console.Write(_chars[index]);
+                Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                 Console.CursorVisible = false;
             }
-            timer.Stop();
-            if (line == Console.CursorTop)
-            {
-                MoveCursorToPreviousLine();
-                Console.WriteLine($"{message}...OK [{(timer.ElapsedMilliseconds / 1000m).ToString("0.0##")}s]");
-            }
-            else
-            {
-                Console.WriteLine($"OK [{(timer.ElapsedMilliseconds / 1000m).ToString("0.0##")}s]");
-            }
-            Console.CursorVisible = true;
+
+            Console.Write(" ");
+            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+            Console.CursorVisible = cursorVisible;
         }
 
         /// <summary>
-        /// Moves the console cursor to the previous line
+        /// Moves the console cursor to the previous line.
         /// </summary>
-        /// <remarks>
-        /// Added as workaround for failing unit tests
-        /// </remarks>
         private static void MoveCursorToPreviousLine()
         {
             try
