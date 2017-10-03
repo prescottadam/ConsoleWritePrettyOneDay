@@ -41,21 +41,33 @@ namespace ConsoleWritePrettyOneDay
             int index = 0;
             int max = _chars.Length;
 
-            if (!string.IsNullOrWhiteSpace(message) && !message.EndsWith(" "))
+            if (!string.IsNullOrWhiteSpace(message))
             {
-                message += " ";
+                Console.WriteLine($"{message}...");
             }
 
+            int line = Console.CursorTop;
             var timer = new Stopwatch();
             timer.Start();
             while (!task.IsCompleted)
             {
                 await Task.Delay(35);
                 index = ++index % max;
-                Console.Write($"\r{message}{_chars[index]}");
+                Console.WriteLine(_chars[index]);
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                Console.CursorVisible = false;
             }
             timer.Stop();
-            Console.WriteLine($"\r{message}[{(timer.ElapsedMilliseconds / 1000m).ToString("0.0##")}s]");
+            if (line == Console.CursorTop)
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                Console.WriteLine($"{message}...OK [{(timer.ElapsedMilliseconds / 1000m).ToString("0.0##")}s]");
+            }
+            else
+            {
+                Console.WriteLine($"OK [{(timer.ElapsedMilliseconds / 1000m).ToString("0.0##")}s]");
+            }
+            Console.CursorVisible = true;
         }
     }
 }
