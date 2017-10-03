@@ -54,13 +54,13 @@ namespace ConsoleWritePrettyOneDay
                 await Task.Delay(35);
                 index = ++index % max;
                 Console.WriteLine(_chars[index]);
-                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                MoveCursorToPreviousLine();
                 Console.CursorVisible = false;
             }
             timer.Stop();
             if (line == Console.CursorTop)
             {
-                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                MoveCursorToPreviousLine();
                 Console.WriteLine($"{message}...OK [{(timer.ElapsedMilliseconds / 1000m).ToString("0.0##")}s]");
             }
             else
@@ -68,6 +68,24 @@ namespace ConsoleWritePrettyOneDay
                 Console.WriteLine($"OK [{(timer.ElapsedMilliseconds / 1000m).ToString("0.0##")}s]");
             }
             Console.CursorVisible = true;
+        }
+
+        /// <summary>
+        /// Moves the console cursor to the previous line
+        /// </summary>
+        /// <remarks>
+        /// Added as workaround for failing unit tests
+        /// </remarks>
+        private static void MoveCursorToPreviousLine()
+        {
+            try
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+            }
+            catch
+            {
+                // ignore exceptions
+            }
         }
     }
 }
