@@ -13,6 +13,8 @@ namespace ConsoleWritePrettyOneDay.App
             var task = Task.Run(() => Thread.Sleep(4000));
             Spinner.Wait(task, "waiting for task");
 
+            Console.WriteLine();
+            Console.WriteLine("Press [enter] to exit.");
             Console.ReadLine();
         }
     }
